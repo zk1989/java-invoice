@@ -26,7 +26,7 @@ public class InvoicePrintTest {
             invoice.addProduct(new TaxFreeProduct("Bulka", new BigDecimal("5.59")), 2);
             invoice.addProduct(new DairyProduct("Bagieta", new BigDecimal("9.99")), 3);
             invoice.printInvoice();
-            Assert.assertEquals(new BigDecimal("20.67"), invoice.getSubtotal());
+            Assert.assertEquals(new BigDecimal("41.15"), invoice.getSubtotal());
         } catch (Exception e) {
             Assert.fail("printInvoice() threw an exception for an invoice with products: " + e.getMessage());
         }
