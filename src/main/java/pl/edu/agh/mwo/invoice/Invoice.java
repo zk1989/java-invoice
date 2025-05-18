@@ -11,9 +11,31 @@ import java.util.HashMap;
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
+    private static int nextInvoiceNumber = 1;
+    private final int invoiceNumber;
     private HashMap<Product, Integer> products = new HashMap<>();
 
-    public Invoice() {};
+    public Invoice() {
+        this.invoiceNumber = nextInvoiceNumber++;
+    };
+    
+    public void printInvoice() {
+        System.out.println("Invoice number: " + invoiceNumber);
+        System.out.printf("%-15s %-10s %-10s%n", "Product Name", "Quantity", "Price");
+        
+        for (HashMap.Entry<Product, Integer> entry : products.entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            BigDecimal totalPrice = product.getPrice().multiply(new BigDecimal(quantity));
+            
+            System.out.printf("%-15s %-10d %-10s%n", 
+                product.getName(), 
+                quantity, 
+                totalPrice.toString());
+        }
+        
+        System.out.println("Items number: " + products.size());
+    }
 
     public void addProduct(Product product) {
         if (product == null) {
