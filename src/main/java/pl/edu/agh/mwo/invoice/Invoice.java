@@ -17,7 +17,7 @@ public class Invoice {
 
     public Invoice() {
         this.invoiceNumber = nextInvoiceNumber++;
-    };
+    }
     
     public void printInvoice() {
         System.out.println("Invoice number: " + invoiceNumber);
@@ -57,9 +57,11 @@ public class Invoice {
         } else {
             BigDecimal subtotal = BigDecimal.ZERO;
             for (HashMap.Entry<Product, Integer> entry : products.entrySet()) {
-                BigDecimal total = entry.getKey().getPrice().multiply(new BigDecimal(entry.getValue()));
+                BigDecimal total = entry.getKey().getPrice()
+                    .multiply(new BigDecimal(entry.getValue()));
                 subtotal = subtotal.add(total);
-            } return subtotal;
+            } 
+            return subtotal;
         }
     }
 
@@ -69,9 +71,11 @@ public class Invoice {
         } else {
             BigDecimal taxsubtotal = BigDecimal.ZERO;
             for (HashMap.Entry<Product, Integer> entry : products.entrySet()) {
-                BigDecimal total = entry.getKey().getPrice().multiply(entry.getKey().getTaxPercent());
+                BigDecimal total = entry.getKey().getPrice()
+                    .multiply(entry.getKey().getTaxPercent());
                 taxsubtotal = taxsubtotal.add(total);
-            } return taxsubtotal;
+            } 
+            return taxsubtotal;
         }
     }
 
@@ -81,11 +85,13 @@ public class Invoice {
         } else {
             BigDecimal total = BigDecimal.ZERO;
             for (HashMap.Entry<Product, Integer> entry : products.entrySet()) {
-                BigDecimal subtotal = entry.getKey().getPrice().multiply(new BigDecimal(entry.getValue()));
+                BigDecimal subtotal = entry.getKey().getPrice()
+                    .multiply(new BigDecimal(entry.getValue()));
                 BigDecimal tax = subtotal.multiply(entry.getKey().getTaxPercent());
                 BigDecimal sum = subtotal.add(tax);
                 total = total.add(sum);
-            } return total;
+            } 
+            return total;
         }
     }
 }
